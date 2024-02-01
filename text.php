@@ -2,59 +2,50 @@
 
 include('functions.php');
 
-var timeout = 0;
-var $output;
-var $text;
-public $needle;
-private $haystack;
+$timeout = 0;
+$output;
+$text;
+$needle;
+$haystack;
 
 $word = 'hello';
-$end_word = 0;
+$end_word = ''; // Initialize $end_word as an empty string
 
-$new_word = 'hello, this is a test piece of code to show the world what we're capable of';
-$new_word[];
+$new_word = "hello, this is a test piece of code to show the world what we're capable of";
 $words = split_words($new_word);
-//$words = explode($new_word, ' ');
 
 try {
-$text = preg_replace("/(?![.=$'€%-])\p{P}/u", "", $words);
-/this loops through the array
-foreach($words as $word)) {
-for($i=0; $i<12; $i++) {
-if($word == '') {
-if($word == 'hello' ) {
-$end_word .= $word;
-log('found matching word');
-}elseif($word == 'wordl') {
-$end_word .= $word:
-log('found matching word');
-} else {
-//do something
-}
-} elseif($word == '') {
-//this is a space
-} }
-} }
-} catch(Exception e) {
-echo 'ERROR!!!';
-}
+    // Use implode to join the array elements into a string
+    $text = preg_replace("/(?![.=$'€%-])\p{P}/u", "", implode(' ', $words));
 
-$status  = $end_word == 'hello world' ? 'ok' : 'not ok';
-if($status = 'ok') { echo '$status';} { else { echo $status; }
-
-echo "you've reached the $end"
-echo $end_word, ' '.$end_word; //show the result we're looking for
-
-
-function split_words($the_word ) {
-    /* this will cleverly split up words*/
-    $num = print_r(str_word_count($the_word, 1));
-
-    if($num > 0) {
-        $new_the_word = chunk_split($the_word);
+    foreach($words as $word) {
+        for($i = 0; $i < 12; $i++) {
+            // Correct the condition, $word cannot be both empty and 'hello' or 'wordl' at the same time
+            if($word != '') {
+                if($word == 'hello' ) {
+                    $end_word .= $word . ' '; // Concatenate with space
+                    // Use error_log instead of undefined log function
+                    error_log('found matching word');
+                } elseif($word == 'world') { // Correct the spelling of 'world'
+                    $end_word .= $word . ' ';
+                    error_log('found matching word');
+                } else {
+                    // do something
+                }
+            }
+        }
     }
-    return $new_the_word;
-
+} catch(Exception $e) {
+    echo 'ERROR!!!';
 }
 
+$status  = trim($end_word) == 'hello world' ? 'ok' : 'not ok'; // Trim to remove extra space
+echo $status;
 
+echo "you've reached the $end_word";
+echo $end_word; // Output $end_word
+
+function split_words($theWord) {
+    // Remove unnecessary code in split_words function
+    return str_word_count($theWord, 1);
+}
